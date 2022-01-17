@@ -1,0 +1,5 @@
+**/target
+**/.idea
+**/.vscode
+**/out.brs
+**/in.vox

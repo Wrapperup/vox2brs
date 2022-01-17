@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "vox2brs",
+    "vox2brs-cli",
+    "vox2brs-gui",
+]
+
+[profile.release]
+opt-level = 2

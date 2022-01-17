@@ -1,8 +1,8 @@
-#vox2brs
+# vox2brs
 [Download from the releases page](https://github.com/Wrapperup/vox2brs/releases)
 
 <p align=center>
-<img src=https://user-images.githubusercontent.com/7478134/148273037-be45d3f8-75d2-4a96-9b5c-eeae76c170ea.png>
+<img src=https://user-images.githubusercontent.com/7478134/149688242-f1afbf68-d0f5-4669-96f1-ce2f0a0ee614.png>
 </p>
 <br>
 
@@ -11,8 +11,36 @@ vox2brs is a tool to convert your MagicaVoxel `.vox` files into Brickadia's `.br
 ## Getting Started
 [Download vox2brs-gui or vox2brs-cli from here](https://github.com/Wrapperup/vox2brs/releases)
 
-The GUI version (based on egui) is recommended if you are just getting started.
-The CLI version is also available via clap-rs.
+![image](https://user-images.githubusercontent.com/7478134/149688378-ec6761b4-d89c-41fd-a6bb-9e353f68b89a.png)
 
-### vox2brs-cli Usage
-See `vox2brs-cli --help` for help.
+The GUI version is recommended if you are just getting started.
+The CLI version is also available, see below for usage.
+
+## vox2brs CLI Usage
+See `vox2brs --help` for help.
+
+```
+vox2brs-cli
+Convert MagicaVoxel models into a BRS file
+
+USAGE:
+    vox2brs.exe [OPTIONS] <INPUT> <OUTPUT> [ARGS]
+
+ARGS:
+    <INPUT>     Input path to .vox file
+    <OUTPUT>    Output directory of the converted .brs file
+    <MODE>      How voxels are interpreted [default: brick] [possible values: brick, plate,
+                micro-brick]
+    <WIDTH>     Width of the output brick
+    <HEIGHT>    Height of the output brick
+
+OPTIONS:
+    -h, --help        Print help information
+    -r, --rampify     Run rampifier?
+    -s, --simplify    Should we run the simplifier?
+```
+
+Examples:
+* `vox2brs my_tree.brs my_tree.vox micro-brick 1 1 --simplify`
+* `vox2brs my_tree.brs my_tree.vox brick --rampify` NOTE: Rampify also implies simplify.
+* `vox2brs my_tree.brs my_tree.vox plate`

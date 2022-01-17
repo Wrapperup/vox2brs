@@ -45,12 +45,16 @@ struct Args {
     /// Width of the output brick.
     width: Option<u32>,
 
-    /// Size Z of the output brick.
+    /// Height of the output brick.
     height: Option<u32>,
 
     /// Should we run the simplifier?
     #[clap(short, long)]
     simplify: bool,
+
+    /// Run rampifier?
+    #[clap(short, long)]
+    rampify: bool,
 }
 
 fn main() -> Result<(), &'static str> {
@@ -77,6 +81,8 @@ fn main() -> Result<(), &'static str> {
         vec![
             "PB_DefaultBrick".into(),
             "PB_DefaultMicroBrick".into(),
+            "PB_DefaultRamp".into(),
+            "PB_DefaultWedge".into(),
         ];
 
     // In case this changes in the future... it should already be empty.
@@ -84,7 +90,7 @@ fn main() -> Result<(), &'static str> {
 
     let vox_data = VoxFile::load(&args.input.into_os_string().into_string().unwrap());
 
-    let result = vox2brs(vox_data, save, args.mode, args.width, args.height, args.simplify);
+    let result = vox2brs(vox_data, save, args.mode, args.width, args.height, args.simplify, args.rampify, 0, 1, 2, 3);
 
     match result {
         Ok(out_save) => {

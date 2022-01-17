@@ -1,15 +1,7 @@
-use std::cmp::min;
-use std::fs::File;
-use std::num::ParseIntError;
-use std::path::{Path, PathBuf};
-use std::str::FromStr;
 use std::time::Instant;
-use brickadia::{
-    save::{BrickOwner, SaveData},
-    write::SaveWriter,
-};
+use brickadia::save::SaveData;
 use clap::{ArgEnum};
-use brickadia::save::{Brick, BrickColor, Color, Size, User};
+use brickadia::save::{Brick, BrickColor, Color, Size};
 use create_vox::{Model, VoxFile};
 use rampifier::{Rampifier, RampifierConfig};
 
@@ -99,7 +91,7 @@ pub fn vox2brs(
 
     let models_len = in_vox_data.models.len() + in_vox_data.copies.len();
 
-    fn row_major_rotation(pos: (i32, i32, i32), rotation_byte: u8, debug: bool) -> (i32, i32, i32) {
+    fn row_major_rotation(pos: (i32, i32, i32), rotation_byte: u8) -> (i32, i32, i32) {
         let (x, y, z) = pos;
 
         let r1_i = (rotation_byte >> 0) & 0b11;
@@ -132,7 +124,7 @@ pub fn vox2brs(
         let size = (model.size.0 as i32, model.size.1 as i32, model.size.2 as i32);
 
         if let Some(rot) = rot_option {
-            row_major_rotation(pos, rot, true);
+            row_major_rotation(pos, rot);
             println!("model rotation: {:#016b}", rot);
         }
 
@@ -145,7 +137,7 @@ pub fn vox2brs(
             );
 
             if let Some(rot) = rot_option {
-                vox_pos = row_major_rotation(vox_pos, rot, false);
+                vox_pos = row_major_rotation(vox_pos, rot);
             }
 
             let pos = (

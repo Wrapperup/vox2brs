@@ -1,16 +1,13 @@
 use std::fs::File;
 use std::ops::RangeInclusive;
 use std::path::Path;
-use std::time::Instant;
 use brickadia::save::{BrickOwner, SaveData, User};
 use brickadia::write::SaveWriter;
 use create_vox::VoxFile;
 use eframe::{egui, epi};
-use eframe::egui::{Checkbox, Color32, Hyperlink, Label, Layout, RichText, TextEdit, TextStyle, TopBottomPanel};
+use eframe::egui::{Checkbox, Color32, Hyperlink, RichText, TextEdit, TopBottomPanel};
 use eframe::egui::special_emojis::GITHUB;
-use rampifier::{Rampifier, RampifierConfig};
 use vox2brs::{BrickOutputMode, vox2brs};
-use vox2brs::BrickOutputMode::Brick;
 
 /// We derive Deserialize/Serialize so we can persist app state on shutdown.
 #[cfg_attr(feature = "persistence", derive(serde::Deserialize, serde::Serialize))]
@@ -35,7 +32,7 @@ impl Default for Vox2BrsApp {
             mode: BrickOutputMode::Brick,
             width: 1.0,
             height: 1.0,
-            simplify: false,
+            simplify: true,
             rampify: false,
         }
     }
@@ -48,7 +45,7 @@ impl epi::App for Vox2BrsApp {
 
     /// Called each time the UI needs repainting, which may be many times per second.
     /// Put your widgets into a `SidePanel`, `TopPanel`, `CentralPanel`, `Window` or `Area`.
-    fn update(&mut self, ctx: &egui::CtxRef, frame: &epi::Frame) {
+    fn update(&mut self, ctx: &egui::CtxRef, _frame: &epi::Frame) {
         let input_file_valid = Path::new(&self.input_file_path).exists();
         let output_dir_valid = Path::new(&self.output_directory).is_dir();
 
@@ -199,7 +196,7 @@ impl epi::App for Vox2BrsApp {
 
                     let vox_data = VoxFile::load(&self.input_file_path);
 
-                    let mut result = vox2brs(
+                    let result = vox2brs(
                         vox_data,
                         save,
                         self.mode,
@@ -228,12 +225,12 @@ impl epi::App for Vox2BrsApp {
 
                                     println!("Save written to {}", &output_file_path);
                                 },
-                                Err(error) => {
+                                Err(_) => {
                                     println!("Could not write to {}", &output_file_path);
                                 }
                             }
                         },
-                        Err(error) => {
+                        Err(_) => {
                             println!("Could not convert VOX file.");
                         }
                     }

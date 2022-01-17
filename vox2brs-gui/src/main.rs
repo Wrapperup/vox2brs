@@ -4,7 +4,7 @@
 
 mod app;
 
-use std::{env, fs::File, path::Path};
+use std::env;
 use app::Vox2BrsApp;
 
 // When compiling natively:

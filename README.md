@@ -2,11 +2,11 @@
 [Download from the releases page](https://github.com/Wrapperup/vox2brs/releases)
 
 <p align=center>
-<img src=https://user-images.githubusercontent.com/7478134/149688242-f1afbf68-d0f5-4669-96f1-ce2f0a0ee614.png>
+<img src=https://user-images.githubusercontent.com/7478134/149688794-7a39ba41-9187-4e80-86c7-4a9716e736d5.png>
 </p>
 <br>
 
-vox2brs is a tool to convert your MagicaVoxel `.vox` files into Brickadia's `.brs` file format.
+vox2brs is a tool to convert your MagicaVoxel `.vox` files into Brickadia's `.brs` file format. It can turn voxels into bricks, plates, and microbricks in any size you want. Rampifier included!
 
 ## Getting Started
 [Download vox2brs-gui or vox2brs-cli from here](https://github.com/Wrapperup/vox2brs/releases)
@@ -44,3 +44,7 @@ Examples:
 * `vox2brs my_tree.brs my_tree.vox micro-brick 1 1 --simplify`
 * `vox2brs my_tree.brs my_tree.vox brick --rampify` NOTE: Rampify also implies simplify.
 * `vox2brs my_tree.brs my_tree.vox plate`
+
+## Media
+<img src=https://user-images.githubusercontent.com/7478134/149688946-49d98267-9e4e-4165-a85d-5274d0623c31.png>
+<img src=https://user-images.githubusercontent.com/7478134/149688242-f1afbf68-d0f5-4669-96f1-ce2f0a0ee614.png>
